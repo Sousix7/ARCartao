@@ -26,7 +26,7 @@ public class AttackSpider : MonoBehaviour
         }
     }
 
-    // NOVA FUNÇÃO: Contar impactos de objetos que caem
+
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Meteoro"))
