@@ -4,6 +4,7 @@ public class AttackSpider : MonoBehaviour
 {
     public Animator animation;
 
+
     void Update()
     {
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
