@@ -3,7 +3,7 @@ using UnityEngine;
 public class AttackSpider : MonoBehaviour
 {
     public Animator animation;
-
+    private int impactos = 0; // Contador de impactos
 
     void Update()
     {
@@ -26,4 +26,27 @@ public class AttackSpider : MonoBehaviour
         }
     }
 
+    // NOVA FUNÇÃO: Contar impactos de objetos que caem
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Meteoro"))
+        {
+            impactos++;
+            Debug.Log("A aranha foi atingida! Impactos: " + impactos);
+
+            if (impactos >= 3) // Se for atingida 3 vezes, morre
+            {
+                Debug.Log("Aranha morreu!");
+                animation.SetTrigger("Die");
+
+                // Ativar física e soltar a aranha
+                Rigidbody rb = GetComponent<Rigidbody>();
+                rb.isKinematic = false; // Agora pode ser afetada pela física
+                rb.AddForce(Vector3.down * 5, ForceMode.Impulse); // Faz ela cair
+
+                // Destruir a aranha depois de 3 segundos
+                Destroy(gameObject, 3f);
+            }
+        }
+    }
 }
